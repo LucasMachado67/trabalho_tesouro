@@ -30,13 +30,6 @@ public class MatrizTesouros {
         colocarSimbolos(tesouros, 'T', 8, random);
         colocarSimbolos(tesouros, 'A', 5, random);
 
-        // Exibindo a matriz com os valores finais - não mostrar para o usuário
-        // for (int i = 0; i < 9; i++) {
-        //     for (int j = 0; j < 9; j++) {
-        //         System.out.print(tesouros[i][j] + " ");
-        //     }
-        //     System.out.println();
-        // }
 
         return tesouros;
     }
@@ -51,6 +44,15 @@ public class MatrizTesouros {
                 mapa[linha][coluna] = simbolo;
                 colocados++;
             }
+        }
+    }
+
+    public void mostrarTesouros(){
+         for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(tesouros[i][j] + " ");
+            }
+            System.out.println();
         }
     }
 

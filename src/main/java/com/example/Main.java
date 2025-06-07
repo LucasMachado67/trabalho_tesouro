@@ -6,6 +6,7 @@ import com.example.matrizes.MatrizTesouros;
 import com.example.matrizes.MatrizUsuario;
 import com.example.pontuacao.Pontuacao;
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -20,6 +21,7 @@ public class Main {
         boolean sair = false;
 
         int totalEscavacoes = 0;
+        int totalTesouros = 0 ;
 
         do {
             
@@ -42,16 +44,46 @@ public class Main {
                 System.out.println("Coordenada já escavada!"); 
              } else{
                 matrizUsuario.matriz[linha][coluna] = matrizTesouros.tesouros[linha][coluna];
+                totalEscavacoes += 1;
 
                 if (matrizUsuario.matriz[linha][coluna] == 'T') {
-                    total.adicionaDez(total.pontuacao);
+                    total.adicionaDez();
+                    System.out.println("ACHOU UM TESOURO!");
+                    totalTesouros += 1;
+
                 }else if (matrizUsuario.matriz[linha][coluna] == 'A') {
-                    total.subtrairCinco(total.pontuacao);
+                    total.subtrairCinco();
+                    System.out.println("CAIU EM UMA ARMADILHA!");
+                }else{
+                    System.out.println("Nada encontrado");
                 }
 
+                System.out.println("PONTUAÇÃO ATUAL: " + total.pontuacao);
+                matrizUsuario.mostrarMatriz();
              }
-             System.out.println("PONTUAÇÃO ATUAL: " + total.pontuacao);
-            matrizUsuario.mostrarMatriz();
+
+             if (totalTesouros == 8 ) {
+                total.resultadoFinal(total.pontuacao);
+                System.out.println();
+                System.out.println();
+                System.out.println(total.resultado);
+                System.out.println();
+                System.out.println();
+                System.out.println("-------Mapa do Tesouro--------");
+                matrizTesouros.mostrarTesouros();
+                sair = true;
+             }else if (totalEscavacoes == 25) {
+                total.resultadoFinal(total.pontuacao);
+                System.out.println();
+                System.out.println();
+                System.out.println(total.resultado);
+                System.out.println();
+                System.out.println();
+                System.out.println("-------Mapa do Tesouro--------");
+                matrizTesouros.mostrarTesouros();
+                sair = true;
+             }
+             
         } while (sair == false);
 
         scan.close();
