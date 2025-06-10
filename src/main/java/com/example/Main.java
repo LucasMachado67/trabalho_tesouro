@@ -9,6 +9,7 @@ import com.example.pontuacao.Pontuacao;
 
 public class Main {
     public static void main(String[] args) {
+        
 
         MatrizTesouros matrizTesouros = new MatrizTesouros();
         MatrizUsuario matrizUsuario = new MatrizUsuario();
@@ -23,23 +24,48 @@ public class Main {
         int totalEscavacoes = 0;
         int totalTesouros = 0 ;
 
+        int linha = 0;
+        int coluna = 0;
         do {
-            
-            System.out.println("Digite a linha entre 1 e 8");
-            int linha = scan.nextInt();
-            while (linha < 1 || linha > 8) {
-                System.out.println("Erro, coordenada da linha errada");
-                System.out.println("Digite a linha entre 1 e 8");
-                linha = scan.nextInt();
+
+
+            //pede a coordenada da linha para o usuário
+            while (true) {
+                System.out.println("Digite a linha entre 1 e 8:");
+                //Verifca se o que foi digitado é um número, para não parar o programa
+                if (scan.hasNextInt()) {
+                    //Pede ao usuário digitar a linha
+                    linha = scan.nextInt();
+                    if (linha >= 1 && linha <= 8) {//Validando a posição
+                        break; // força a saída do while para seguir com o código
+                    } else {
+                        System.out.println("Erro, coordenada da linha fora do intervalo.");
+                    }
+                } else {
+                    System.out.println("Erro, digite apenas números.");
+                    scan.next();
+                }
             }
 
-            System.out.println("Digite a coluna entre 1 e 8");
-            int coluna = scan.nextInt();
-            while (coluna < 1 || coluna > 8 ) {
-                System.out.println("Erro, coordenada da coluna errada");
-                System.out.println("Digite a coluna entre 1 e 8");
-                coluna = scan.nextInt();
+
+            //pede a coordenada da coluna para o usuário
+            while (true) {
+                System.out.println("Digite a coluna entre 1 e 8:");
+                //valida se é número
+                if (scan.hasNextInt()) {
+                    coluna = scan.nextInt();
+                    if (coluna >= 1 && coluna <= 8) {//Validando a posição
+                        break; // força a saída do while para seguir com o código
+                    } else {
+                        System.out.println("Erro, coordenada da coluna fora do intervalo.");
+                    }
+                } else {
+                    System.out.println("Erro, digite apenas números.");
+                    scan.next();
+                }
             }
+
+
             if (matrizUsuario.matriz[linha][coluna] == 'T' || matrizUsuario.matriz[linha][coluna] == 'A' || matrizUsuario.matriz[linha][coluna] == 'O') {
                 System.out.println("Coordenada já escavada!"); 
              } else{
@@ -72,7 +98,8 @@ public class Main {
                 System.out.println("-------Mapa do Tesouro--------");
                 matrizTesouros.mostrarTesouros();
                 sair = true;
-             }else if (totalEscavacoes == 25) {
+             }
+            if (totalEscavacoes == 25) {
                 total.resultadoFinal(total.pontuacao);
                 System.out.println();
                 System.out.println();
